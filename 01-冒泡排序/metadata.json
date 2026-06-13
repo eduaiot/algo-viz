@@ -1,0 +1,8 @@
+{
+  "name": "Bubble Sort visualizer",
+  "description": "An interactive bubble sort animation using a real-world scenario of students lining up by height.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
