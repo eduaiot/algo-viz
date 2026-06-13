@@ -1,20 +1,23 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+  ○ 第 1 轮： 为了找到最高的，每个人都要比一下。5 个人要比 4 次。
+  ○ 第 2 轮： 最高的走了，剩下 4 个人，要比 3 次。
+  ○ 第 3 轮： 又走一个，剩下 3 个人，要比 2 次。
+  ○ 第 4 轮： 剩下 2 个人，只要比 1 次。
+总比较次数 = 4 + 3 + 2 + 1 = 10次。
+如果是 n 个人，则总次数 = (n-1) + （n-2）+ ... + 2 + 1。可以看出来这个就是等差求和[]。
 
-# Run and deploy your AI Studio app
+num = [5, 2, 8, 1]
+# n-1 次循环，比较时会把最后一个算进去，在第11行进行了“j+1”
+count = len(num) - 1
 
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/e00eceae-25a8-479b-b36c-fee1ae7a20f7
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+# 最外侧的循环i的意义是让子循环循环“总数-i”次
+for i in range(count):
+    print(f"\n第 {i+1} 轮冒泡：", end='')    
+    
+    # 比较剩余的循环，把大的放后面
+    for j in range(count - i):  
+        # 两两比较，满足条件交换位置
+        if num[j] > num[j+1]:
+            num[j], num[j+1] = num[j+1], num[j]
+    print("当前列表:", num, end='')
+    
+print("\n最终排序结果:", num)
