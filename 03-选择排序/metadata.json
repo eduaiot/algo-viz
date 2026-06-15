@@ -1,0 +1,6 @@
+{
+  "name": "麻将选择排序演示 (Selection Sort)",
+  "description": "通过麻将牌生动演示选择排序算法的过程，分为前排已排序和后排未排序组，支持逐步播放。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
