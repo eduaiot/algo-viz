@@ -1,0 +1,6 @@
+{
+  "name": "Insertion Sort Animation",
+  "description": "An interactive animation of the Insertion Sort algorithm using a deck of cards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
