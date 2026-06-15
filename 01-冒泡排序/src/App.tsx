@@ -53,6 +53,15 @@ export default function App() {
       </div>
 
       <header className="py-12 px-6 text-center max-w-4xl mx-auto">
+        <div className="flex justify-start mb-6">
+          <a
+            href="../index.html"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 hover:bg-gray-50 text-gray-600 font-medium transition-colors"
+          >
+            <ChevronLeft size={18} />
+            <span>返回首页</span>
+          </a>
+        </div>
         <h1 className="text-4xl md:text-5xl font-black tracking-tight mb-4 text-gray-900">
           冒泡排序演示：体育课排队
         </h1>

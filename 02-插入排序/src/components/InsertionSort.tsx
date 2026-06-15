@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { ChevronRight, RotateCcw } from 'lucide-react';
+import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
 import { CardData } from '../types';
 
 const INITIAL_CARDS: CardData[] = [
@@ -143,6 +143,15 @@ export default function InsertionSort() {
   return (
     <div className="min-h-screen bg-white text-slate-900 pb-32">
       <header className="px-6 py-8 text-center max-w-4xl mx-auto">
+        <div className="flex justify-start mb-6">
+          <a
+            href="../index.html"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 hover:bg-slate-50 text-slate-600 font-medium transition-colors"
+          >
+            <ChevronLeft size={18} />
+            <span>返回首页</span>
+          </a>
+        </div>
          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
            插入排序动画演示
          </h1>
