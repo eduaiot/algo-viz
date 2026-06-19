@@ -18,14 +18,8 @@ const CODE_LINES = [
 ];
 
 const generateInitialTiles = (): Tile[] => {
-  const pool = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  // Shuffle array using Fisher-Yates
-  for (let i = pool.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
-  }
-  // Take first 6 and convert to Tiles
-  return pool.slice(0, 6).map((val, idx) => ({ id: `tile-${idx}-${val}`, value: val }));
+  const pool = [8, 9, 1, 3, 2, 5];
+  return pool.map((val, idx) => ({ id: `tile-${idx}-${val}`, value: val }));
 };
 
 const generateStates = (initialArr: Tile[]): SortState[] => {
@@ -258,7 +252,7 @@ export default function App() {
             </div>
           </div>
 
-            <div className="flex flex-wrap gap-4 md:gap-x-6 md:gap-y-16 min-h-[110px] md:min-h-[220px] p-6 pt-10 pb-10 md:pt-14 md:pb-14 bg-slate-50 border border-slate-200 rounded-3xl shadow-sm relative">
+            <div className="flex flex-nowrap justify-center gap-4 md:gap-x-6 min-h-[110px] md:min-h-[220px] p-6 pt-10 pb-10 md:pt-14 md:pb-14 bg-slate-50 border border-slate-200 rounded-3xl shadow-sm relative">
               {currentState.arr.map((tile, idx) => {
                 const isSorted = idx < currentState.sortedEnd;
                 const isTarget = idx === currentState.targetIdx;
