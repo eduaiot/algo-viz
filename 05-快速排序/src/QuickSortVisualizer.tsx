@@ -227,9 +227,9 @@ export default function QuickSortVisualizer() {
         <p className="text-slate-500 font-medium">Quick Sort: The Three-Basket Approach</p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full">
+      <div className="flex flex-col lg:flex-row gap-8 w-full">
         {/* Visualizer Section */}
-        <div className="lg:col-span-7 flex flex-col gap-6">
+        <div className="flex-1 flex flex-col gap-6">
           <div className="bg-white border border-slate-200 rounded-xl p-8 h-[300px] flex flex-col items-center relative overflow-hidden">
             {/* Top Row: Original Sub-array */}
             <div className="flex items-end justify-center gap-2 h-1/2 w-full border-b border-slate-100 pb-4">
@@ -384,7 +384,7 @@ export default function QuickSortVisualizer() {
         </div>
 
         {/* Code Section */}
-        <div className="lg:col-span-5 flex flex-col gap-4">
+        <div className="w-full lg:w-[45%] shrink-0 flex flex-col gap-4">
           <div className="bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col h-[500px]">
             <div className="bg-white px-4 py-3 border-b border-slate-200 flex items-center justify-between">
               <span className="text-xs font-mono text-slate-500 uppercase tracking-widest font-bold">Py代码</span>
