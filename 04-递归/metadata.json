@@ -1,0 +1,6 @@
+{
+  "name": "递归动画演示 (Recursion Vis)",
+  "description": "Educational animation showing recursive function calls and tree structure.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
