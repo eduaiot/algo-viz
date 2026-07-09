@@ -1,0 +1,5 @@
+{
+  "name": "Quick Sort Visualizer",
+  "description": "An interactive animation to teach Quick Sort algorithm with Python code highlighting.",
+  "requestFramePermissions": []
+}
