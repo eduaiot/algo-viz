@@ -229,7 +229,7 @@ export default function QuickSortVisualizer() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full">
         {/* Visualizer Section */}
-        <div className="lg:col-span-6 flex flex-col gap-6">
+        <div className="lg:col-span-7 flex flex-col gap-6">
           <div className="bg-white border border-slate-200 rounded-xl p-8 h-[300px] flex flex-col items-center relative overflow-hidden">
             {/* Top Row: Original Sub-array */}
             <div className="flex items-end justify-center gap-2 h-1/2 w-full border-b border-slate-100 pb-4">
@@ -324,7 +324,7 @@ export default function QuickSortVisualizer() {
           </div>
 
           {/* Legend */}
-          <div className="bg-white border border-slate-200 rounded-xl py-4 px-6 flex flex-wrap md:flex-nowrap items-center justify-center gap-x-4 md:gap-x-6 gap-y-3 w-full overflow-x-auto">
+          <div className="bg-white border border-slate-200 rounded-xl py-4 px-6 flex flex-wrap md:flex-nowrap items-center justify-center gap-x-4 md:gap-x-6 gap-y-3 w-full">
             <div className="flex items-center gap-2 text-sm whitespace-nowrap">
               <div className="w-3 h-3 rounded bg-orange-500"></div>
               <span className="text-slate-600 font-medium">标杆</span>
@@ -384,10 +384,10 @@ export default function QuickSortVisualizer() {
         </div>
 
         {/* Code Section */}
-        <div className="lg:col-span-6 flex flex-col gap-4">
-          <div className="bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col h-[520px]">
+        <div className="lg:col-span-5 flex flex-col gap-4">
+          <div className="bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col h-[500px]">
             <div className="bg-white px-4 py-3 border-b border-slate-200 flex items-center justify-between">
-              <span className="text-xs font-mono text-slate-500 uppercase tracking-widest font-bold">Python Implementation</span>
+              <span className="text-xs font-mono text-slate-500 uppercase tracking-widest font-bold">Py代码</span>
               <div className="flex gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-rose-400"></div>
                 <div className="w-2.5 h-2.5 rounded-full bg-amber-400"></div>
