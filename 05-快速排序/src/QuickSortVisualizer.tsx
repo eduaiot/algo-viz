@@ -34,7 +34,7 @@ const PYTHON_CODE = [
   "    return quick_sort(left) + middle + quick_sort(right)"
 ];
 
-const FRUITS = ['🍎', '🍌', '🍇', '🍉', '🍓', '🍑', '🥝', '🍒', '🍍', '🥭'];
+const FRUITS = ['🍒', '🍓', '🍇', '🥝', '🍌', '🍎', '🍑', '🥭', '🍍', '🍉'];
 const INITIAL_ARRAY_SIZE = 7;
 
 export default function QuickSortVisualizer() {
@@ -230,79 +230,116 @@ export default function QuickSortVisualizer() {
       <div className="flex flex-col lg:flex-row gap-8 w-full">
         {/* Visualizer Section */}
         <div className="flex-1 flex flex-col gap-6">
-          <div className="bg-white border border-slate-200 rounded-xl p-8 h-[300px] flex flex-col items-center relative overflow-hidden">
+          <div className="bg-white border border-slate-200 rounded-xl p-6 h-[340px] flex flex-col items-center relative overflow-hidden">
+            {/* Top explanation text */}
+            <div className="w-full text-center mb-2 min-h-[36px] flex items-center justify-center">
+              {currentStep.message && (
+                <span className="text-xs md:text-sm font-bold text-indigo-900 bg-indigo-50/60 px-4 py-1 rounded-full border border-indigo-100/40 shadow-sm">
+                  {currentStep.message}
+                </span>
+              )}
+            </div>
+
             {/* Top Row: Original Sub-array */}
-            <div className="flex items-end justify-center gap-2 h-1/2 w-full border-b border-slate-100 pb-4">
+            <div className="flex items-end justify-center gap-2 h-[120px] w-full border-b border-slate-100 pb-4">
               <AnimatePresence mode="popLayout">
-                {currentStep.array.map((val, idx) => {
-                  const assignment = currentStep.basketAssignments[idx];
-                  const isPivot = currentStep.pivotIndex === idx;
-                  const isCurrent = currentStep.currentIndex === idx;
-                  const isSorted = currentStep.sortedIndices.has(idx);
-                  const isDimmed = currentStep.partitionRange &&
-                    (idx < currentStep.partitionRange[0] || idx > currentStep.partitionRange[1]);
+                {(() => {
+                  const N = currentStep.array.length;
+                  const leftElements = currentStep.array.map((_, i) => i).filter(i => currentStep.basketAssignments[i] === 'left');
+                  const middleElements = currentStep.array.map((_, i) => i).filter(i => currentStep.basketAssignments[i] === 'middle');
+                  const rightElements = currentStep.array.map((_, i) => i).filter(i => currentStep.basketAssignments[i] === 'right');
 
-                  // Determine colors based on state
-                  let bgColor = 'bg-slate-200';
-                  let textColor = 'text-slate-600';
-                  let ring = '';
+                  return currentStep.array.map((val, idx) => {
+                    const assignment = currentStep.basketAssignments[idx];
+                    const isPivot = currentStep.pivotIndex === idx;
+                    const isCurrent = currentStep.currentIndex === idx;
+                    const isSorted = currentStep.sortedIndices.has(idx);
+                    const isDimmed = currentStep.partitionRange &&
+                      (idx < currentStep.partitionRange[0] || idx > currentStep.partitionRange[1]);
 
-                  if (isSorted) {
-                    bgColor = 'bg-emerald-500';
-                    textColor = 'text-white';
-                  } else if (isPivot) {
-                    bgColor = 'bg-orange-400';
-                    textColor = 'text-white';
-                  } else if (assignment === 'left') {
-                    bgColor = 'bg-rose-400';
-                    textColor = 'text-white';
-                  } else if (assignment === 'middle') {
-                    bgColor = 'bg-teal-400';
-                    textColor = 'text-white';
-                  } else if (assignment === 'right') {
-                    bgColor = 'bg-sky-400';
-                    textColor = 'text-white';
-                  }
+                    // Determine colors based on state
+                    let bgColor = 'bg-slate-200';
+                    let textColor = 'text-slate-600';
+                    let ring = '';
 
-                  // "Current" (点名) state overrides others for visibility
-                  if (isCurrent) {
-                    bgColor = 'bg-indigo-600';
-                    textColor = 'text-white';
-                    ring = 'ring-2 ring-offset-2 ring-indigo-600';
-                  }
+                    if (isSorted) {
+                      bgColor = 'bg-emerald-500';
+                      textColor = 'text-white';
+                    } else if (isPivot) {
+                      bgColor = 'bg-orange-400';
+                      textColor = 'text-white';
+                    } else if (assignment === 'left') {
+                      bgColor = 'bg-rose-400';
+                      textColor = 'text-white';
+                    } else if (assignment === 'middle') {
+                      bgColor = 'bg-teal-400';
+                      textColor = 'text-white';
+                    } else if (assignment === 'right') {
+                      bgColor = 'bg-sky-400';
+                      textColor = 'text-white';
+                    }
 
-                  // Vertical displacement logic
-                  let translateY = 0;
-                  let translateX = 0;
-                  if (assignment === 'left') { translateY = 110; translateX = -160; }
-                  if (assignment === 'middle') { translateY = 110; translateX = 0; }
-                  if (assignment === 'right') { translateY = 110; translateX = 160; }
+                    // "Current" (点名) state overrides others for visibility
+                    if (isCurrent) {
+                      bgColor = 'bg-indigo-600';
+                      textColor = 'text-white';
+                      ring = 'ring-2 ring-offset-2 ring-indigo-600';
+                    }
 
-                  const fruit = FRUITS[val % FRUITS.length];
+                    // Vertical displacement logic
+                    let translateY = 0;
+                    let translateX = 0;
+                    if (assignment) {
+                      translateY = 95;
+                      const originX = (idx - (N - 1) / 2) * 64;
+                      let basketCenter = 0;
+                      let k = 0;
+                      let count = 0;
 
-                  return (
-                    <motion.div
-                      key={`${idx}-${val}`}
-                      layout
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{
-                        opacity: isDimmed ? 0.2 : 1,
-                        y: translateY,
-                        x: translateX,
-                        scale: isCurrent ? 1.2 : 1,
-                      }}
-                      transition={{ type: "tween", ease: "easeInOut", duration: 0.35 }}
-                      className={`w-14 h-14 rounded-2xl flex flex-col items-center justify-center text-xs font-bold relative transition-colors duration-200
-                        ${bgColor} ${textColor} ${ring} shadow-md
-                      `}
-                    >
-                      <span className="text-2xl drop-shadow-sm">{fruit}</span>
-                      <span className="absolute -bottom-6 text-slate-700 font-mono text-[11px] bg-slate-100/80 px-2 py-0.5 rounded-full">{val}</span>
-                      {isPivot && <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] text-orange-600 font-mono font-bold">PIVOT</div>}
-                      {isCurrent && !assignment && <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-[10px] text-indigo-600 font-mono font-bold whitespace-nowrap">点名中...</div>}
-                    </motion.div>
-                  );
-                })}
+                      if (assignment === 'left') {
+                        basketCenter = -160;
+                        k = leftElements.indexOf(idx);
+                        count = leftElements.length;
+                      } else if (assignment === 'middle') {
+                        basketCenter = 0;
+                        k = middleElements.indexOf(idx);
+                        count = middleElements.length;
+                      } else if (assignment === 'right') {
+                        basketCenter = 160;
+                        k = rightElements.indexOf(idx);
+                        count = rightElements.length;
+                      }
+
+                      const targetX = basketCenter + (k - (count - 1) / 2) * 60;
+                      translateX = targetX - originX;
+                    }
+
+                    const fruitIndex = Math.min(Math.floor((val - 10) / 9), FRUITS.length - 1);
+                    const fruit = FRUITS[fruitIndex];
+
+                    return (
+                      <motion.div
+                        key={`${idx}-${val}`}
+                        layout
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{
+                          opacity: isDimmed ? 0.2 : 1,
+                          y: translateY,
+                          x: translateX,
+                          scale: isCurrent ? 1.2 : 1,
+                        }}
+                        transition={{ type: "tween", ease: "easeInOut", duration: 0.35 }}
+                        className={`w-14 h-14 rounded-2xl flex flex-col items-center justify-center text-xs font-bold relative transition-colors duration-200
+                          ${bgColor} ${textColor} ${ring} shadow-md
+                        `}
+                      >
+                        <span className="text-2xl drop-shadow-sm">{fruit}</span>
+                        <span className="absolute -bottom-6 text-slate-700 font-mono text-[11px] bg-slate-100/80 px-2 py-0.5 rounded-full">{val}</span>
+                        {isPivot && <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] text-orange-600 font-mono font-bold">PIVOT</div>}
+                      </motion.div>
+                    );
+                  });
+                })()}
               </AnimatePresence>
             </div>
 
@@ -345,11 +382,6 @@ export default function QuickSortVisualizer() {
               <div className="w-3 h-3 rounded bg-slate-200"></div>
               <span className="text-slate-600 font-medium">未排序</span>
             </div>
-          </div>
-
-          {/* Message Box */}
-          <div className={`transition-opacity duration-300 ${currentStep.message ? 'bg-white border border-sky-100 rounded-xl p-4 min-h-[80px] flex items-center justify-center text-center' : 'opacity-0 min-h-[80px]'}`}>
-            <p className="text-lg font-bold text-sky-900 tracking-wide">{currentStep.message}</p>
           </div>
 
           {/* Controls */}
