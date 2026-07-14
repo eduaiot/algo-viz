@@ -1,0 +1,6 @@
+{
+  "name": "Merge Sort Visualizer",
+  "description": "An interactive animation of the merge sort algorithm, demonstrating the divide-and-conquer strategy with a tree-based visualization.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
